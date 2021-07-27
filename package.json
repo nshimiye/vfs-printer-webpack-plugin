@@ -1,0 +1,5 @@
+{
+    "version": "1.0.0",
+    "name": "vfs-printer-webpack-plugin",
+    "main": "index.js"
+}
