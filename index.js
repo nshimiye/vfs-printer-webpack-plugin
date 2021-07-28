@@ -3,13 +3,10 @@ class VFSPrinter {
     constructor(options) {this.options = options; }
     apply(compiler) {
 
-        // var pluginOptions = this.options;
-        // var rootFolder = pluginOptions.rootFolder.replace('C:', '/C').replace('\\\\', '/');
         compiler.hooks.beforeRun.tapAsync('VfsToRfs', ({ inputFileSystem }, callback) => {
-
             inputFileSystem._webpackCompilerHost._memoryHost.write = function (path, content) {
-            const filePath = `vfs/${path.replace('/C/Users/nmarc/profession/general/tutorial/language-specific/typescript/angular/mytestapp/','')}`;
-            const [parentFolder, fileName] = filePath.split(/([^\/]+)$/);
+            const filePath = `vfs/${path.replace(process.cwd(), '')}`;
+            const [parentFolder, /* fileName */] = filePath.split(/([^\/]+)$/);
             require('fs').mkdirSync(
                 parentFolder, { recursive: true }
             );
